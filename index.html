@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sotreq Seminovos - Equipamentos Multimarcas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f0fff0;
+            color: #333;
+        }
+        
+        header {
+            background-color: #008000;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #90ee90;
+        }
+        
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Valtra.webp');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,128,0,0.4) 0%, rgba(0,100,0,0.4) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 22px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .products {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: #008000;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #008000;
+        }
+        
+        .section-title p {
+            color: #006400;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eaeaea;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: #008000;
+        }
+        
+        .product-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 50%);
+        }
+        
+        .product-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 15px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .product-info {
+            padding: 25px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 15px;
+            color: #008000;
+            font-size: 22px;
+        }
+        
+        .product-info p {
+            margin-bottom: 25px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: #008000;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid #008000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+        
+        .button:hover {
+            background-color: #006400;
+            border-color: #006400;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .features {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            color: #008000;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 20px;
+            color: #006400;
+            margin-bottom: 15px;
+        }
+        
+        .cta {
+            background: linear-gradient(135deg, #008000 0%, #006400 100%);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .cta::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 160px;
+            height: 160px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #008000;
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .privacy-policy {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        footer {
+            background-color: #004d00;
+            color: white;
+            padding: 50px 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: #90ee90;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #90ee90;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: #90ee90;
+        }
+        
+        .footer-bottom {
+            margin-top: 30px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Sotreq Seminovos</div>
+                <ul class="nav-links">
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Produtos</a></li>
+                    <li><a href="#">Sobre</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>COMPRE SEU SEMINOVO MULTIMARCA</h1>
+            <p>E LEVE SEGURANÇA E TRANQUILIDADE</p>
+            <a href="https://wa.me/5541996801324" target="_blank" class="button">FALE CONOSCO</a>
+        </div>
+    </section>
+    
+    <section class="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Equipamentos</h2>
+                <p>Na Sotreq Seminovos você encontra equipamentos multimarcas e multiprodutos de procedência e qualidade, e para equipamento Caterpillar você conta com garantia de fábrica em equipamentos elegíveis.</p>
+            </div>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('398k.webp');">
+                        <div class="product-label">Carregadeiras 938K</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Carregadeiras 938K</h3>
+                        <p>Carregadeira potente e versátil, em excelente estado de conservação. Ideal para movimentação de materiais e trabalhos em canteiros de obras.</p>
+                        <a href="https://wa.me/5541996801324" target="_blank" class="button">COMPRE SEU SEMINOVO AGORA</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('336.webp');">
+                        <div class="product-label">Escavadeiras 336</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Escavadeiras 336</h3>
+                        <p>Escavadeira Cat 336, amarela, seminova, com esteiras e cabine envidraçada. Equipamento de alta performance para escavações.</p>
+                        <a href="https://wa.me/5541996801324" target="_blank" class="button">COMPRE SEU SEMINOVO AGORA</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('Valtra.webp');">
+                        <div class="product-label">Trator de Rodas Valtra</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Trator de Rodas Valtra</h3>
+                        <p>Trator de Rodas Valtra amarelo, seminovo, próprio para o agronegócio. Econômico e versátil para diversas aplicações.</p>
+                        <a href="https://wa.me/5541996801324" target="_blank" class="button">COMPRE SEU SEMINOVO AGORA</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>MULTIMARCAS E MULTIPRODUTOS</h2>
+                <p>Variedade de equipamentos para atender a sua necessidade</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">MÁQUINAS CAT COM GARANTIA DE FÁBRICA (CCU)</h3>
+                    <p>Para equipamentos CAT elegíveis conte com a garantia CCU, uma garantia que cobre o trem de força e hidráulico do equipamento, mais tranquilidade para seu negócio.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌎</div>
+                    <h3 class="feature-title">MAIS DE 65 FILIAIS E PRESENÇA INTERNACIONAL</h3>
+                    <p>A Sotreq Seminovos está onde você estiver!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">VÍDEOCHAMADA</h3>
+                    <p>Assista seu equipamento em ação antes de comprar, economizando e ganhando tempo!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3 class="feature-title">MÁQUINAS COM PROCEDÊNCIA E QUALIDADE</h3>
+                    <p>Aqui na Sotreq Seminovos os equipamentos possuem relatório de inspeção, onde você garante qual o real estado do equipamento antes de comprá-lo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <div class="container">
+            <h2 style="margin-bottom: 20px; color: #fff; font-size: 36px;">COMECE A PAGAR DAQUI A 90 DIAS</h2>
+            <h3 style="margin-bottom: 20px; color: #fff; font-size: 28px;">TUDO ISSO COM A CREDIBILIDADE SOTREQ</h3>
+            <p style="margin-bottom: 30px; color: #fff; font-size: 18px;">Sotreq Seminovos é Multimarcas, é Multiprodutos. Com a Sotreq Seminovos você encontra o equipamento ideal para sua operação, são máquinas multimarcas de qualidade e com histórico de manutenção.</p>
+            <a href="https://wa.me/5541996801324" target="_blank" class="button" style="background-color: #023047;">COMPRE SEU SEMINOVO AGORA</a>
+        </div>
+    </section>
+    
+    <section class="contact" style="padding: 80px 0; background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>FALE COM A SOTREQ SEMINOVOS</h2>
+                <p>Entre em contato conosco e encontre o equipamento ideal para suas necessidades</p>
+            </div>
+            
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nome*</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-mail*</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Número de celular*</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Empresa*</label>
+                        <input type="text" id="company" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="document">CPF/CNPJ*</label>
+                        <input type="text" id="document" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="state">Estado*</label>
+                        <select id="state" class="form-control" required>
+                            <option value="">Selecione</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city">Cidade*</label>
+                        <input type="text" id="city" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" class="form-control"></textarea>
+                    </div>
+                    
+                    <div class="privacy-policy">
+                        A Sotreq S/A precisa das informações que você nos fornece para entrar em contato com relação a produtos e serviços. Você pode deixar de receber essas comunicações quando quiser. Para obter informações sobre nossas práticas e compromisso com os seus dados, confira nossa Política de Privacidade.
+                    </div>
+                    
+                    <button type="submit" class="button">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sotreq Seminovos</h3>
+                    <p>Sua melhor opção em equipamentos multimarcas e multiprodutos no Brasil.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <p>Telefone: (41) 99680-1324</p>
+                    <p>Email: contato@sotreq.com.br</p>
+                    <p>Endereço: Av. Principal, 1500 - Centro</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <a href="#">Início</a>
+                    <a href="#">Produtos</a>
+                    <a href="#">Sobre nós</a>
+                    <a href="#">Política de Privacidade</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Sotreq Seminovos - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
